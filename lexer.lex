@@ -26,7 +26,7 @@
         signo   = [+-]
         digitos = [0-9]
         punto = .
-        exponente = [eE]
+        exponente = [eE]12
         (digitos)+((punto)?(digitos)*)?((exponente)(signo)?(digitos)+)?
 
         donde '+' es uno o más veces
@@ -60,21 +60,7 @@ import java.io.IOException;
     }
 
 
-    /*
 
-        ****************** LEER ********************
-
-        - %public es para que la clase sea publica y se pueda utilizar en otros paquetes
-        - %class Lexer es para que la clase generada se llame "Lexer"
-        - %function nextToken el lexer generado tendra una funcion nextToken() para obtener
-           el siguiente token del input
-        - %type Token es para que la clase tome en cuenta que vamos a devolver un objeto Token
-
-        todo esto no se modifica por ningun motivo :)
-
-        *** Despues de "%type Token" pueden definir sus ER o tokens, van a encontrar
-        el ejemplo para SEMI (";") y para WHITESPACE
-    */
 %}
 
 %public
@@ -82,8 +68,22 @@ import java.io.IOException;
 %function nextToken
 %type Token
 
-SEMI = ";" // Definan aqui sus Tokens/ER por ejemplo: "el token SEMI"
+SEMI = ";"
 WHITE = (" "|\t|\n)
+PLUS = "+"
+MINUS = "-"
+MULTI = "*"
+DIV = "/"
+MOD = "%"
+POW = "^"
+LPAREN =  "("
+RPAREN = ")"
+SIGN = [+-]
+DIGIT = [0-9]
+DIGITS   = {DIGIT}+
+POINT = \.
+EXP = [eE]
+NUMBER   = {SIGN}?{DIGITS}({POINT}{DIGITS}*)?({EXP}{SIGN}?{DIGITS})?
 
 %%
 
@@ -93,3 +93,39 @@ WHITE = (" "|\t|\n)
 
 <YYINITIAL>.        { return new Token(Token.ERROR);
                       /* todo lo demas es ERROR */ }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
